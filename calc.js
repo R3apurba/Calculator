@@ -1,30 +1,23 @@
-let currentInput = '';
-let equation = '';
 const display = document.getElementById('user_input');
 
 document.querySelectorAll('input[type="button"]').forEach(button => {
     button.addEventListener('click', () => {
         const value = button.value;
+        const currentValue = display.value;
 
         if (!isNaN(value) || value === '.') {
-            currentInput += value;
-            equation += value;
+            display.value = currentValue + value;
         } else if (value === 'C') {
-            currentInput = equation = '';
+            display.value = '';
         } else if (value === '←') {
-            currentInput = currentInput.slice(0, -1);
-            equation = equation.slice(0, -1);
+            display.value = currentValue.slice(0, -1);
         } else if (value === '=') {
-            if (currentInput) {
-                equation = evaluateEquation(equation);
-                currentInput = equation;
+            if (currentValue) {
+                display.value = evaluateEquation(currentValue);
             }
-        } else if (currentInput && !isNaN(currentInput[currentInput.length - 1])) {
-            equation += value;
-            currentInput = '';
+        } else if (currentValue && !isNaN(currentValue[currentValue.length - 1])) {
+            display.value = currentValue + value;
         }
-
-        display.value = equation;
     });
 });
 
