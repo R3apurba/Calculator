@@ -61,3 +61,8 @@ body{
 #user_input{
     font-family:Kanit;
 }
+.calculator input[type='button']:active{
+    scale:0.9;
+    background-color:gainsboro;
+    transition:ease-in-out;
+}
